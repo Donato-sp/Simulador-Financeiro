@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirSafe Simulator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif; /*Define a fonte do texto para Arial.*/
+            text-align: center; /*Centraliza todo o conteúdo da página.*/
+            background-color: #ffffff; /*Define o fundo branco da página.*/
+            color: #333; /*Define a cor do texto para um cinza escuro.*/
+            margin: 50px; /*Adiciona um espaço externo (margem) ao redor do conteúdo para não ficar colado nas bordas.*/
+        }
+
+        h1 {
+            color: #D50000; /* Vermelho da AirSafe */
+        }
+
+        input {
+            padding: 10px; /*Adiciona espaço interno para deixar o campo mais confortável para digitar.*/
+            width: 200px; /*Define a largura fixa do input em 200 pixels.*/
+            border: 2px solid #D50000; /*Cria uma borda vermelha de 2px de espessura ao redor do input.*/
+            border-radius: 5px; /*Arredonda os cantos da borda para um visual mais moderno.*/
+            font-size: 16px; /*Define o tamanho do texto dentro do input como 16px (tamanho padrão confortável).*/
+            text-align: center; /*Centraliza o texto dentro da caixa do input.*/
+        }
+
+        button {
+            background-color: #D50000; /*Define o fundo do botão como vermelho.*/
+            color: white; /*Define a cor do texto como branca.*/
+            border: none; /*Remove a borda padrão do botão.*/
+            padding: 10px 20px; /*Adiciona espaço interno (altura = 10px, largura = 20px).*/
+            font-size: 16px; /*Define um tamanho de fonte maior para melhor leitura.*/
+            border-radius: 5px; /*Arredonda os cantos do botão.*/
+            cursor: pointer; /*Faz o cursor do mouse virar uma mãozinha 🖱️ quando passar no botão.*/
+        }
+
+        button:hover {
+            /* HOVER:  Aplica estilos diferentes quando o usuário passa o mouse sobre o botão.*/
+            background-color: #A00000; /* Vermelho mais escuro no hover */
+        }
+
+        #div_msg {
+            margin-top: 20px; /*Adiciona um espaço superior para separar a mensagem do botão.*/
+            font-size: 18px; /*Aumenta o tamanho do texto para melhor visibilidade.*/
+            font-weight: bold; /*Deixa o texto negrito.*/
+            color: #D50000; /*Define a cor do texto como vermelho para destacar a mensagem.*/
+        }
+    </style>
+
+</head>
+<body>
+    
+<h1>Simulador de investimento!</h1>
+<br><br>
+<h4>Insira a área total (m²):</h4>
+<br><br>
+<input type="number" id="input_area" placeholder="Ex: 200">
+<br><br>
+<button onclick="calcular()">Calcular</button>
+<br><br>
+<div id="div_msg"></div>
+
+
+</body>
+</html>
+
+<script>
+
+    function calcular(){
+        
+        var area = Number(input_area.value);
+        var sensor = 50;
+        var valorBase = 10000;
+        var sensorExtra = 3000;
+
+        if (area <=0 ){
+            alert("Insira um valor válido!");
+        } else if (area <=50){
+            div_msg.innerHTML = `
+            Você precisará de 1 sensor. <br>
+            O valor do seu investimento será de R$ 10000`
+        } else {
+            var sensoresNecessarios = Math.ceil(area/sensor);
+            var valorTotal = valorBase + (sensoresNecessarios - 1) * sensorExtra;
+            div_msg.innerHTML = `
+            Você precisará de ${sensoresNecessarios} sensores.<br>
+            O valor do seu investimento será de R$ ${valorTotal}`
+
+        }
+
+    }
+
+</script>
